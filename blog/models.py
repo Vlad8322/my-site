@@ -2,13 +2,14 @@ from django.conf import settings
 from django.db import models, migrations
 from django.utils import timezone
 
-
+class LoadImage(models.Model):
+    load_image = models.FileField(upload_to = 'uploads/')
 
 class Post(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     text = models.TextField()
-    image = models.FileField (upload_to = 'uploads/')
+    image = models.ForeignKey(LoadImage, on_delete=models.CASCADE)
     created_date = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(blank=True, null=True)
 
@@ -28,7 +29,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Post',
+            name='LoadImage',
             fields=[
                 ('id',
                  models.AutoField(
@@ -37,7 +38,7 @@ class Migration(migrations.Migration):
                      serialize=False,
                      verbose_name='ID'
                  )),
-                ('image', models.FileField()),
+                ('load_image', models.FileField()),
             ],
         ),
     ]
