@@ -3,11 +3,11 @@ from django.db import models, migrations
 from django.utils import timezone
 
 class LoadImage(models.Model):
-    name = models.CharField(max_length=200)
     load_image = models.FileField(upload_to = 'uploads/')
+    name_image = models.CharField(default=None, max_length=200)
 
     def __str__(self):
-        return self.name
+        return self.name_image
 
 class Post(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
